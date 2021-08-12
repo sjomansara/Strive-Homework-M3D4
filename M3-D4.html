@@ -2,6 +2,12 @@
 <html>
 
 <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+
+    <title>My Online Marketplace</title>
     <!--
             You are creating the "shopping cart experience" for a Online Marketplace.
             You have the list of the available books from the current API:
@@ -24,6 +30,56 @@
 </head>
 
 <body>
+
+<div class="jumbotron m-5 text-center">
+  <h1 class="display-4">My Online Marketplace</h1>
+</div>
+
+<div class="container">
+        <div class="row">
+
+        </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
+
+<script>
+
+let books = []
+const row = document.querySelector(".row")
+
+window.onload = () => {
+    fetch("https://striveschool-api.herokuapp.com/books")
+    .then(response => response.json())
+    .then(books => {
+        displayBooks(books)
+    })
+    .catch(err => {
+        console.log(err)
+    })
+}
+
+console.log("Display books...")
+
+function displayBooks(books) {
+    console.log(books)
+    const row = document.querySelector(".row")
+    row.innerHTML = books.map(book => `
+    <div class="col-12 col-sm-6 col-md-3">
+                    <div class="card mb-3">
+                        <img src="${book.img}" class="card-img-top" alt="${book.title}">
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-danger">Skip</button>
+                            <button type="button" class="btn btn-primary">Add to cart</button>
+                        </div>
+                    </div>
+                </div>
+                     `
+            ).join("")
+        }
+
+</script>
 
 </body>
 
